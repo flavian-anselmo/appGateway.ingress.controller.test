@@ -49,7 +49,7 @@ az aks enable-addons -n $aksName -g $rgName -a ingress-appgw --appgw-id $appgwId
 ```
 
 ```
-# Create vnet peerings
+# Create vnet peerings (only if the appGateway and the cluster belong to different vnets)
 aksVnetId=$(az network vnet show -n $aksVnetName -g $rgName -o tsv --query "id")
 az network vnet peering create -n AppGWtoAKSVnetPeering -g $rgName --vnet-name $appgwVnetName --remote-vnet $aksVnetId --allow-vnet-access
 
@@ -73,10 +73,4 @@ kubectl get ingress -n nginx
 ```
 
 
-## Author
 
-Anderson Soares Lopes
-
-[![GitHub](https://skillicons.dev/icons?i=github)](https://github.com/lopes221)
-[![Linkedin](https://skillicons.dev/icons?i=linkedin)](https://www.linkedin.com/in/andersonsoaresl/)
-# appGateway.ingress.controller
